@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Selecting Elements #01</title>
+    <link rel='stylesheet' href='css/style.css'>
+    <script src='js/jquery.js'></script>
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form input,
+        form select,
+        form button {
+            margin: 10px;
+            font-size: 1.6em;
+        }
+    </style>
+</head>
+
+<body class='content exercise'>
+    <h1>Selecting Elements #01</h1>
+    <div>
+        <p>Paragraph
+            <span class='bold'>inside span</span>
+        </p>
+    </div>
+    <div>
+        <ul id='market'>
+            <li>Rice</li>
+            <li wm-obrigatorio>Bean</li>
+            <li class='opcional'>Steak</li>
+            <li class='opcional'>Egg</li>
+        </ul>
+    </div>
+    <form>
+        <input type='text' name='texto'>
+        <input type='password' name='senha'>
+        <input type='checkbox' name='check1'>
+        <input type='radio' name='radio1'>
+        <input type='file' name='arquivo'>
+    </form>
+
+    <script>
+        $('#market').addClass('highlights').removeClass('highlights');
+        $('li').addClass('highlights')
+        $('[wm-obrigatorio]').removeClass('highlights');
+        $('li.opcional').removeClass('highlights');
+        $('div p span').addClass('highlights');
+
+        /*first li element*/
+        $('li:first').css('border', 'solid 3px yellow');
+        $('li:odd').css('border', 'solid 10px orange');
+        /*gt = greater than 1 element index bigger than 1.*/
+        $('li:gt(1)').css('border', 'solid 10px black');
+        /*every element, but the last one*/
+        $('li:not(:last)').css('border', 'none');
+        $('li:contains("S")').css('background-color', 'blue');
+
+        $('form *').hide();
+        $('form :text').show();
+        $('form :password').show();
+        $('form :checkbox').show();
+        $('form :radio').show();
+        $('form :file').show();
+    </script>
+</body>
