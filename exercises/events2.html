@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Events #02</title>
+    <link rel='stylesheet' href='css/style.css'>
+    <script src='js/jquery.js'></script>
+    <style>
+        input {
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body class='content exercise'>
+    <h1>Eventos #02</h1>
+    <div id='div1'>1</div>
+    <div id="result1">?</div>
+    <br>
+    <input type="text" placeholder="Type and Select">
+    <div id="result2">?</div>
+    <script>
+        
+        //callback to change the class everytime that is called
+        const changeHighlights = () => $('#div1').toggleClass('highlights')
+    
+        // it can add to callbacks, when enters and when exits
+        $('#div1').hover(changeHighlights, e => {console.log('exits')})
+
+        //event happens only ONE TIME
+        $('#div1').one('mouseenter', e => alert('Warning'))
+        $('#div1').dblclick(e => $('#div1').fadeOut(1000).fadeIn(1000))
+
+        $(window).resize(function(e){
+            const widthWindow = $(window).width()
+            const heightWindow = $(window).height()
+            $('#result1').html(`Width: ${widthWindow}, Height: ${heightWindow}`)
+        })
+
+        //get the string selected on input
+        $(':input').select(e =>{
+            const initValue = e.target.selectionStart
+            const endValue = e.target.selectionEnd
+            $('#result2').html(e.target.value.substring(initValue, endValue))
+        })
+    </script>
+</body>
