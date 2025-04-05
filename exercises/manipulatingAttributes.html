@@ -56,5 +56,8 @@
         }
 
         $('[wm-relogio]').each((index, ele) => new Watch(ele))
+
+        $('[wm-relogio]').attr({newAttibute: 'new'})
+        $('[wm-relogio]').removeAttr('newAttibute')
     </script>
 </body>
