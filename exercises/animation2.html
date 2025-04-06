@@ -28,16 +28,16 @@
     <div>Animate!</div>
 
     <script>
-        function changeWidth(value, duration, callbackFunction){
+        async function changeWidth(value, duration, callbackFunction){
             // animation is done, it calls callbackFunction
             $('div').animate({width: `+=${value}`}, duration, callbackFunction)
         }
 
-        function moveDiagonal(value, duration, callbackFunction){
+        async function moveDiagonal(value, duration, callbackFunction){
             $('div').animate({top: `+=${value}`, left: `+=${value}`}, duration, callbackFunction)
         }
 
-        function rotateFunction(value, duration, callbackFunction){
+        async function rotateFunction(value, duration, callbackFunction){
             $('div').animate({transform: `+=${value}`},{
                 step: function(value){
                     $(this).css('transform', `rotate(${value}deg)`)
@@ -47,13 +47,11 @@
         }
         // linear: duration is equal, there others options where the beginning is faster 
 
-        changeWidth(300, 100, () =>{
-             //600ms
-            changeWidth(-300, 'slow', () =>{
-                moveDiagonal(300, 600, () =>{
-                    rotateFunction(3600, 3000)
-                })
-            })
-        })
+
+        changeWidth(300, 100, null)
+        .then(changeWidth(-300, 'slow', null))
+        .then(moveDiagonal(300, 600, null))
+        .then(rotateFunction(3600, 3000, null))
+
     </script>
 </body>
