@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Animation #02</title>
+    <link rel='stylesheet' href='css/style.css'>
+    <script src='js/jquery.js'></script>
+    <style>
+        body {
+            position: relative;
+            background-color: #999;
+            color: #000;
+        }
+
+        div {
+            position: absolute;
+            display: inline;
+            border: solid 10px #000;
+            padding: 50px;
+            font-size: 3em;
+            background-color: crimson;
+        }
+    </style>
+</head>
+
+<body>
+    <div>Animate!</div>
+
+    <script>
+        function changeWidth(value, duration, callbackFunction){
+            // animation is done, it calls callbackFunction
+            $('div').animate({width: `+=${value}`}, duration, callbackFunction)
+        }
+
+        function moveDiagonal(value, duration, callbackFunction){
+            $('div').animate({top: `+=${value}`, left: `+=${value}`}, duration, callbackFunction)
+        }
+
+        function rotateFunction(value, duration, callbackFunction){
+            $('div').animate({transform: `+=${value}`},{
+                step: function(value){
+                    $(this).css('transform', `rotate(${value}deg)`)
+                },
+                duration: duration
+            }, 'linear', callbackFunction)
+        }
+        // linear: duration is equal, there others options where the beginning is faster 
+
+        changeWidth(300, 100, () =>{
+             //600ms
+            changeWidth(-300, 'slow', () =>{
+                moveDiagonal(300, 600, () =>{
+                    rotateFunction(3600, 3000)
+                })
+            })
+        })
+    </script>
+</body>
